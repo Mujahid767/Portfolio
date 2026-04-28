@@ -9,10 +9,11 @@ export async function POST(req: NextRequest) {
     if (!email || !password) {
       return NextResponse.json({ error: 'Missing credentials' }, { status: 400 });
     }
-    if (!checkCredentials(email, password)) {
+    const verifiedEmail = await checkCredentials(email, password);
+    if (!verifiedEmail) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
-    const token = await signSession({ email });
+    const token = await signSession({ email: verifiedEmail });
     setAdminCookie(token);
     return NextResponse.json({ ok: true });
   } catch (e: any) {

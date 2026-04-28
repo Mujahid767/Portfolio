@@ -10,6 +10,7 @@ import {
   Image as ImageIcon,
   Inbox,
   LayoutDashboard,
+  Lock,
   LogOut,
   MessageSquare,
   Settings,
@@ -30,6 +31,7 @@ import { AchievementsEditor } from './sections/AchievementsEditor';
 import { CertificatesEditor } from './sections/CertificatesEditor';
 import { MessagesPanel } from './sections/MessagesPanel';
 import { GeneralEditor } from './sections/GeneralEditor';
+import { AccountEditor } from './sections/AccountEditor';
 
 type Section =
   | 'overview'
@@ -44,7 +46,8 @@ type Section =
   | 'education'
   | 'achievements'
   | 'certificates'
-  | 'messages';
+  | 'messages'
+  | 'account';
 
 const NAV: { id: Section; label: string; icon: React.ReactNode }[] = [
   { id: 'overview', label: 'Overview', icon: <LayoutDashboard className="h-4 w-4" /> },
@@ -60,6 +63,7 @@ const NAV: { id: Section; label: string; icon: React.ReactNode }[] = [
   { id: 'achievements', label: 'Achievements', icon: <Award className="h-4 w-4" /> },
   { id: 'certificates', label: 'Certificates', icon: <BadgeCheck className="h-4 w-4" /> },
   { id: 'messages', label: 'Inbox', icon: <Inbox className="h-4 w-4" /> },
+  { id: 'account', label: 'Account', icon: <Lock className="h-4 w-4" /> },
 ];
 
 export function AdminEditor({ initial, email }: { initial: Portfolio; email: string }) {
@@ -178,6 +182,7 @@ export function AdminEditor({ initial, email }: { initial: Portfolio; email: str
           {section === 'achievements' && <AchievementsEditor ctx={ctx} />}
           {section === 'certificates' && <CertificatesEditor ctx={ctx} />}
           {section === 'messages' && <MessagesPanel ctx={ctx} />}
+          {section === 'account' && <AccountEditor ctx={ctx} email={email} />}
         </main>
       </div>
 
