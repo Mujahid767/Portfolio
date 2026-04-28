@@ -10,7 +10,10 @@ export type ContactPayload = {
 export async function sendContactEmail(payload: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL;
-  const from = process.env.RESEND_FROM || 'Portfolio Contact <onboarding@resend.dev>';
+  // Resend requires the sender to be from a verified domain.
+  // On the free plan without a custom domain, onboarding@resend.dev is the only allowed sender.
+  // We put the visitor's email in replyTo so replies still land in your inbox.
+  const from = 'Portfolio Contact <onboarding@resend.dev>';
 
   if (!apiKey || !to) {
     return { sent: false, reason: 'no_resend_key' as const };
