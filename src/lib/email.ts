@@ -50,9 +50,8 @@ export async function sendContactEmail(payload: ContactPayload) {
     </div>
   `;
 
-  const text = `New message from ${payload.name} <${payload.email}>\n${
-    payload.subject ? `Subject: ${payload.subject}\n` : ''
-  }\n${payload.body}`;
+  const text = `New message from ${payload.name} <${payload.email}>\n${payload.subject ? `Subject: ${payload.subject}\n` : ''
+    }\n${payload.body}`;
 
   try {
     await resend.emails.send({
