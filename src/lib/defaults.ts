@@ -224,6 +224,6 @@ export const defaultPortfolio: Portfolio = {
     linkedin: 'https://www.linkedin.com/in/tohidur-rahman-mujahid-8755b6280/',
     facebook: 'https://www.facebook.com/muju1433016/',
     codechef: 'https://www.codechef.com/users/avid_scene_94',
-    email: 'mailto:mujahid@example.com',
+    email: 'mailto:mujuleet@gmail.com',
   },
 };
