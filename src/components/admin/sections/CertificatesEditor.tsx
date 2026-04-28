@@ -1,0 +1,188 @@
+'use client';
+
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, Plus, Save, Trash } from 'lucide-react';
+import type { EditorCtx } from '../types';
+import { Field, PageHeader, SectionCard } from '../Field';
+import type { Certificate } from '@/lib/types';
+
+function nid() {
+  return Math.random().toString(36).slice(2, 10);
+}
+
+export function CertificatesEditor({ ctx }: { ctx: EditorCtx }) {
+  const [items, setItems] = useState<Certificate[]>(ctx.data.certificates);
+
+  function update(idx: number, next: Certificate) {
+    setItems(items.map((it, i) => (i === idx ? next : it)));
+  }
+  function move(idx: number, dir: -1 | 1) {
+    const j = idx + dir;
+    if (j < 0 || j >= items.length) return;
+    const arr = [...items];
+    [arr[idx], arr[j]] = [arr[j], arr[idx]];
+    arr.forEach((it, i) => (it.position = i));
+    setItems(arr);
+  }
+  function add() {
+    setItems([
+      ...items,
+      {
+        id: nid(),
+        title: 'New Certificate',
+        issuer: '',
+        date: '',
+        credentialId: '',
+        imageUrl: '',
+        link: '',
+        position: items.length,
+      },
+    ]);
+  }
+  async function saveOne(item: Certificate) {
+    const res = await fetch('/api/admin/certificates', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item),
+    });
+    if (!res.ok) throw new Error((await res.json()).error || 'Save failed');
+  }
+  async function remove(item: Certificate) {
+    if (!confirm(`Delete "${item.title}"?`)) return;
+    const res = await fetch('/api/admin/certificates', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: item.id }),
+    });
+    if (!res.ok) {
+      ctx.notifyErr('Failed');
+      return;
+    }
+    const next = items.filter((it) => it.id !== item.id);
+    next.forEach((it, i) => (it.position = i));
+    setItems(next);
+    ctx.setData({ ...ctx.data, certificates: next });
+    ctx.notifyOk('Deleted');
+  }
+  async function saveAll() {
+    try {
+      for (let i = 0; i < items.length; i++) {
+        await saveOne({ ...items[i], position: i });
+      }
+      const next = items.map((it, i) => ({ ...it, position: i }));
+      setItems(next);
+      ctx.setData({ ...ctx.data, certificates: next });
+      ctx.notifyOk('Certificates saved');
+    } catch (e: any) {
+      ctx.notifyErr(e.message);
+    }
+  }
+
+  return (
+    <>
+      <PageHeader
+        title="Certificates"
+        description="Showcase your earned certifications. Upload images to /public and use a path like /cert-name.png."
+      />
+      <div className="flex items-center justify-between gap-2 flex-wrap mb-4">
+        <button onClick={add} className="btn-ghost text-sm !py-2 !px-4">
+          <Plus className="h-4 w-4" /> Add Certificate
+        </button>
+        <button onClick={saveAll} className="btn-gold text-sm !py-2 !px-5">
+          <Save className="h-4 w-4" /> Save All
+        </button>
+      </div>
+
+      <div className="space-y-4">
+        {items.map((it, idx) => (
+          <SectionCard
+            key={it.id}
+            title={it.title || 'Untitled'}
+            description={it.issuer}
+            action={
+              <div className="flex items-center gap-2">
+                <button className="btn-ghost !p-2" onClick={() => move(idx, -1)}>
+                  <ChevronUp className="h-4 w-4" />
+                </button>
+                <button className="btn-ghost !p-2" onClick={() => move(idx, 1)}>
+                  <ChevronDown className="h-4 w-4" />
+                </button>
+                <button
+                  className="btn-ghost !p-2 hover:!text-red-300 hover:!border-red-400/30"
+                  onClick={() => remove(it)}
+                >
+                  <Trash className="h-4 w-4" />
+                </button>
+              </div>
+            }
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Certificate Title">
+                <input
+                  className="input-luxe"
+                  value={it.title}
+                  onChange={(e) => update(idx, { ...it, title: e.target.value })}
+                />
+              </Field>
+              <Field label="Issuer">
+                <input
+                  className="input-luxe"
+                  value={it.issuer}
+                  onChange={(e) => update(idx, { ...it, issuer: e.target.value })}
+                  placeholder="e.g. Apna College"
+                />
+              </Field>
+              <Field label="Date">
+                <input
+                  className="input-luxe"
+                  value={it.date || ''}
+                  onChange={(e) => update(idx, { ...it, date: e.target.value })}
+                  placeholder="e.g. September 14, 2025"
+                />
+              </Field>
+              <Field label="Credential ID">
+                <input
+                  className="input-luxe"
+                  value={it.credentialId || ''}
+                  onChange={(e) => update(idx, { ...it, credentialId: e.target.value })}
+                />
+              </Field>
+              <Field label="Image URL" hint="Upload to /public and use /name.png, or full URL.">
+                <input
+                  className="input-luxe"
+                  value={it.imageUrl}
+                  onChange={(e) => update(idx, { ...it, imageUrl: e.target.value })}
+                  placeholder="/cert-name.png"
+                />
+              </Field>
+              <Field label="Issuer URL (optional)">
+                <input
+                  className="input-luxe"
+                  value={it.link || ''}
+                  onChange={(e) => update(idx, { ...it, link: e.target.value })}
+                />
+              </Field>
+            </div>
+
+            {it.imageUrl && (
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.18em] text-white/50 mb-2">
+                  Preview
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={it.imageUrl}
+                  alt="Preview"
+                  className="rounded-xl border border-white/10 max-h-56 object-contain bg-white/5"
+                />
+              </div>
+            )}
+          </SectionCard>
+        ))}
+        {items.length === 0 && (
+          <div className="card-luxe text-center text-white/50">No certificates yet.</div>
+        )}
+      </div>
+    </>
+  );
+}
