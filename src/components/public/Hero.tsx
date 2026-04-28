@@ -45,7 +45,7 @@ export function Hero({ data }: { data: Portfolio }) {
   return (
     <section ref={ref} id="top" className="relative pt-36 pb-20 sm:pt-44 sm:pb-32">
       <div className="absolute inset-0 -z-10 grid-bg mask-fade-b" />
-      <div className="absolute inset-0 -z-10 bg-radial-gold pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 -z-10 h-[720px] bg-radial-gold pointer-events-none" />
 
       <div className="container-luxe">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
