@@ -32,16 +32,11 @@ Open `http://localhost:3000` for the public site, and `http://localhost:3000/adm
 
 The database schema is **auto-created and seeded** on first request — no migrations needed.
 
-### Default admin credentials
+### Admin credentials
 
-Defined in `.env.local`:
+Admin credentials live in the `admin_users` table (bcrypt-hashed) — **not** in environment variables. On the very first run with an empty database, an initial admin row is bootstrapped from `ADMIN_EMAIL` / `ADMIN_PASSWORD` if they are set; afterwards those env vars are ignored.
 
-```
-ADMIN_EMAIL=admin@mujahid.dev
-ADMIN_PASSWORD=Mujahid@2026
-```
-
-**Change these before deploying!**
+Once you can sign in, change your email and password from **Admin → Account**. Then you can safely delete the bootstrap env vars.
 
 ---
 
@@ -51,12 +46,15 @@ ADMIN_PASSWORD=Mujahid@2026
 
 ```env
 DATABASE_URL=postgresql://...
-ADMIN_EMAIL=admin@mujahid.dev
-ADMIN_PASSWORD=YourStrongPassword
 AUTH_SECRET=long-random-secret-string-min-32-characters
 
+# Optional — only used to seed the FIRST admin row when the DB is empty.
+# After signing in once, change credentials via Admin → Account and remove these.
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=ChooseAStrongPassword
+
 # Where contact-form messages get emailed
-CONTACT_EMAIL=mujuleet@gmail.com
+CONTACT_EMAIL=you@example.com
 
 # Optional — if set, contact form messages get emailed to CONTACT_EMAIL.
 # Get a free API key at https://resend.com (3000 emails/month free).
@@ -101,16 +99,19 @@ src/
 │        ├─ experiences/
 │        ├─ education/
 │        ├─ achievements/
-│        └─ messages/          ← Inbox
+│        ├─ certificates/
+│        ├─ messages/          ← Inbox
+│        └─ account/           ← Change email / password
 ├─ components/
 │  ├─ public/                  ← Public portfolio sections
 │  └─ admin/                   ← Admin editor + section panels
 └─ lib/
    ├─ db.ts                    ← Neon SQL client
-   ├─ schema.ts                ← Auto-creates tables
+   ├─ schema.ts                ← Auto-creates tables (incl. admin_users)
    ├─ portfolio.ts             ← Data access layer
    ├─ defaults.ts              ← Initial seed data (your info)
-   ├─ auth.ts                  ← JWT cookie auth
+   ├─ auth.ts                  ← JWT cookies + bcrypt admin auth
+   ├─ email.ts                 ← Resend integration for contact form
    └─ types.ts
 ```
 
@@ -135,6 +136,7 @@ You can also drag items up/down with the chevron arrows, mark featured projects 
 - **Skills** — beautifully grouped categories
 - **Selected Work** — featured project cards + grid of others
 - **Journey** — timeline of experiences and education
+- **Certificates** — interactive cards with full-size lightbox
 - **Achievements** — milestone cards
 - **Contact** — direct social links + working contact form (saves to your inbox)
 - **Footer** — social icons + copyright
@@ -145,8 +147,15 @@ You can also drag items up/down with the chevron arrows, mark featured projects 
 
 1. Push to GitHub
 2. Import the repo at [vercel.com/new](https://vercel.com/new)
-3. Add the environment variables (`DATABASE_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `AUTH_SECRET`)
-4. Deploy. The Neon database works seamlessly on Vercel's edge / serverless runtime.
+3. Add the **required** environment variables on Vercel:
+   - `DATABASE_URL`
+   - `AUTH_SECRET`
+4. Add the **optional** environment variables (recommended):
+   - `CONTACT_EMAIL`, `RESEND_API_KEY`, `RESEND_FROM` — for contact-form email delivery
+   - `ADMIN_EMAIL`, `ADMIN_PASSWORD` — only needed if your Neon database is empty and you want a specific seed identity. If you've already signed in locally, the admin row is already in the DB and these are not needed on Vercel.
+5. Deploy. The Neon database works seamlessly on Vercel's edge / serverless runtime.
+
+After the first deploy, sign in at `/admin/login` and change your password from **Admin → Account**.
 
 ---
 
