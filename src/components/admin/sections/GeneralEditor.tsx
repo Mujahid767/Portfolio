@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Save } from 'lucide-react';
 import type { EditorCtx } from '../types';
 import { Field, PageHeader, SectionCard } from '../Field';
+import { ProfilePhotoFields } from './ProfilePhotoFields';
 
 export function GeneralEditor({ ctx }: { ctx: EditorCtx }) {
   const [brand, setBrand] = useState(ctx.data.brand);
@@ -30,12 +31,15 @@ export function GeneralEditor({ ctx }: { ctx: EditorCtx }) {
 
   return (
     <>
-      <PageHeader title="General" description="Brand, logo letter and profile photo." />
+      <PageHeader
+        title="General"
+        description="Brand letter and profile photo. The same photo can be edited under Hero → Edit as well."
+      />
       <SectionCard
-        title="Branding"
+        title="Photo & brand"
         action={
           <button onClick={save} disabled={saving} className="btn-gold !py-2 !px-5 text-sm">
-            <Save className="h-4 w-4" /> {saving ? 'Saving...' : 'Save'}
+            <Save className="h-4 w-4" /> {saving ? 'Saving…' : 'Save'}
           </button>
         }
       >
@@ -43,21 +47,24 @@ export function GeneralEditor({ ctx }: { ctx: EditorCtx }) {
           <input className="input-luxe max-w-xs" maxLength={3} value={brand} onChange={(e) => setBrand(e.target.value)} />
         </Field>
 
-        <Field label="Profile Photo URL" hint="Place an image in /public and use a path like /profile.png, or a full URL.">
-          <input className="input-luxe" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
-        </Field>
+        <div className="my-10 border-t border-white/10" />
 
-        {photoUrl && (
-          <div className="mt-2">
-            <div className="text-[11px] uppercase tracking-[0.18em] text-white/50 mb-2">Preview</div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={photoUrl}
-              alt="Preview"
-              className="rounded-2xl border border-white/10 max-h-72 object-cover"
-            />
-          </div>
-        )}
+        <ProfilePhotoFields
+          photoUrl={photoUrl}
+          onChange={setPhotoUrl}
+          notifyOk={ctx.notifyOk}
+          notifyErr={ctx.notifyErr}
+        />
+
+        <div className="mt-8 pt-6 border-t border-white/10">
+          <button
+            onClick={save}
+            disabled={saving}
+            className="btn-gold !py-2 !px-5 text-sm inline-flex items-center gap-2"
+          >
+            <Save className="h-4 w-4" /> {saving ? 'Saving…' : 'Save changes'}
+          </button>
+        </div>
       </SectionCard>
     </>
   );

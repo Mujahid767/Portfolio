@@ -5,8 +5,11 @@ import { Plus, Save, X } from 'lucide-react';
 import type { EditorCtx } from '../types';
 import { Field, PageHeader, SectionCard } from '../Field';
 
+import { ProfilePhotoFields } from './ProfilePhotoFields';
+
 export function HeroEditor({ ctx }: { ctx: EditorCtx }) {
   const [hero, setHero] = useState(ctx.data.hero);
+  const [photoUrl, setPhotoUrl] = useState(ctx.data.photoUrl);
   const [saving, setSaving] = useState(false);
 
   function update<K extends keyof typeof hero>(k: K, v: (typeof hero)[K]) {
@@ -19,10 +22,10 @@ export function HeroEditor({ ctx }: { ctx: EditorCtx }) {
       const res = await fetch('/api/admin/portfolio', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ hero }),
+        body: JSON.stringify({ hero, photoUrl }),
       });
       if (!res.ok) throw new Error((await res.json()).error || 'Save failed');
-      ctx.setData({ ...ctx.data, hero });
+      ctx.setData({ ...ctx.data, hero, photoUrl });
       ctx.notifyOk('Hero saved');
     } catch (e: any) {
       ctx.notifyErr(e.message);
@@ -35,16 +38,25 @@ export function HeroEditor({ ctx }: { ctx: EditorCtx }) {
     <>
       <PageHeader
         title="Hero Section"
-        description="The very first thing visitors read. Make it count."
+        description="Pick your profile photo at the top, then edit your name and headline. One Save updates everything."
       />
       <SectionCard
-        title="Hero Content"
+        title="Hero — photo & text"
         action={
           <button onClick={save} disabled={saving} className="btn-gold !py-2 !px-5 text-sm">
-            <Save className="h-4 w-4" /> {saving ? 'Saving...' : 'Save'}
+            <Save className="h-4 w-4" /> {saving ? 'Saving…' : 'Save all'}
           </button>
         }
       >
+        <ProfilePhotoFields
+          photoUrl={photoUrl}
+          onChange={setPhotoUrl}
+          notifyOk={ctx.notifyOk}
+          notifyErr={ctx.notifyErr}
+        />
+
+        <div className="my-10 border-t border-white/10" />
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Greeting">
             <input
