@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, Github, Linkedin, Mail, Sparkles, Trophy } from 'lucide-react';
+import { ArrowRight, FileText, Github, Linkedin, Mail, Sparkles, Trophy } from 'lucide-react';
 import type { Portfolio } from '@/lib/types';
 import { useEffect, useRef, useState } from 'react';
 
@@ -106,6 +106,15 @@ export function Hero({ data }: { data: Portfolio }) {
                 </a>
                 <a href="#contact" className="btn-ghost">
                   Get in Touch
+                </a>
+                <a
+                  href="/cv.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-ghost"
+                >
+                  <FileText className="h-4 w-4" />
+                  View CV
                 </a>
                 {data.hero.resumeUrl && (
                   <a

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { FileText, Menu, X } from 'lucide-react';
 import type { Portfolio } from '@/lib/types';
 
 const links = [
@@ -67,6 +67,15 @@ export function Nav({ data }: { data: Portfolio }) {
           </ul>
 
           <div className="flex items-center gap-2">
+            <a
+              href="/cv.html"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full border border-white/10 bg-white/[0.03] text-white/70 hover:text-white hover:border-white/20 transition-all"
+            >
+              <FileText className="h-3.5 w-3.5" />
+              CV
+            </a>
             <a href="#contact" className="hidden sm:inline-flex btn-gold !px-5 !py-2 text-sm">
               Let&apos;s Talk
             </a>
@@ -94,6 +103,18 @@ export function Nav({ data }: { data: Portfolio }) {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/cv.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-white/80 hover:bg-white/[0.04]"
+                  onClick={() => setOpen(false)}
+                >
+                  <FileText className="h-4 w-4" />
+                  View CV
+                </a>
+              </li>
             </ul>
           </div>
         )}
