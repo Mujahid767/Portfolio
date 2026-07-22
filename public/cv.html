@@ -4,537 +4,420 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tohidur Rahman Mujahid — CV</title>
-  <meta name="description" content="Curriculum Vitae of Tohidur Rahman Mujahid — AI Engineer & Full-Stack Developer" />
+  <meta name="description" content="CV of Tohidur Rahman Mujahid — AI Engineer & Full-Stack Developer" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #0a0a0f;
-      --surface: #12121a;
-      --surface2: #1a1a25;
-      --border: #2a2a3d;
-      --accent: #6c63ff;
-      --accent2: #a78bfa;
-      --accent3: #38bdf8;
-      --text: #e8e8f0;
-      --text-muted: #8888a8;
-      --gradient: linear-gradient(135deg, #6c63ff 0%, #a78bfa 50%, #38bdf8 100%);
-      --radius: 12px;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
+      background: #f0f0f4;
+      color: #1a1a2e;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
-    /* TOOLBAR */
+    /* ── TOOLBAR ── */
     .toolbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 14px 32px;
-      background: rgba(10, 10, 15, 0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      background: #1a1a2e;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .toolbar-brand {
-      font-weight: 700; font-size: 1.1rem;
-      background: var(--gradient);
+    .toolbar-brand { color: #a78bfa; font-weight: 700; font-size: 14px; }
+    .btn-print {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 6px; font-size: 12px; font-weight: 600;
+      background: linear-gradient(135deg, #6c63ff, #a78bfa); color: #fff;
+      border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .btn-print:hover { opacity: 0.85; }
+
+    /* ── PAGE ── */
+    .page-wrap { max-width: 850px; margin: 20px auto; box-shadow: 0 4px 40px rgba(0,0,0,0.15); }
+
+    .cv {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 1100px;
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .sidebar {
+      background: #12121a;
+      color: #e0e0f0;
+      padding: 32px 22px;
+    }
+
+    .sidebar-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #6c63ff, #a78bfa, #38bdf8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; font-weight: 800; color: #fff;
+      margin-bottom: 14px;
+      box-shadow: 0 0 0 3px rgba(108,99,255,0.3);
+    }
+
+    .sidebar-name {
+      font-size: 15px; font-weight: 800; line-height: 1.2; margin-bottom: 4px;
+      background: linear-gradient(135deg, #a78bfa, #38bdf8);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .toolbar-actions { display: flex; gap: 12px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 20px; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 600; cursor: pointer;
-      transition: all 0.2s ease; text-decoration: none;
-      border: none; font-family: 'Inter', sans-serif;
-    }
-    .btn-primary { background: var(--gradient); color: #fff; }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(108,99,255,0.35); }
-    .btn-ghost { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
-    .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
 
-    /* PAGE */
-    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 100px 24px 60px; }
+    .sidebar-role {
+      font-size: 10.5px; color: #8888a8; font-weight: 500; margin-bottom: 18px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
 
-    /* HEADER */
-    .cv-header {
-      position: relative; padding: 48px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); margin-bottom: 20px; overflow: hidden;
-    }
-    .cv-header::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--gradient);
-    }
-    .cv-header-inner { display: flex; align-items: flex-start; gap: 40px; }
-    .cv-avatar {
-      width: 100px; height: 100px; border-radius: 50%;
-      background: var(--gradient);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.4rem; font-weight: 800; color: #fff; flex-shrink: 0;
-      box-shadow: 0 0 0 4px rgba(108,99,255,0.25), 0 0 40px rgba(108,99,255,0.2);
-    }
-    .cv-header-info { flex: 1; }
-    .availability-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 5px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+    .avail-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px; border-radius: 12px; font-size: 10px; font-weight: 600;
       background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
-      color: #22c55e; margin-bottom: 12px;
+      color: #22c55e; margin-bottom: 22px;
     }
-    .availability-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+    .avail-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
       animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .cv-name {
-      font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em;
-      line-height: 1.1; margin-bottom: 10px;
-      background: var(--gradient);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .cv-titles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .cv-title-badge {
-      padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
-      border: 1px solid var(--border); color: var(--accent2);
-      background: rgba(108,99,255,0.08);
-    }
-    .cv-tagline { font-size: 0.93rem; color: var(--text-muted); line-height: 1.7; max-width: 580px; margin-bottom: 20px; }
-    .cv-contact { display: flex; flex-wrap: wrap; gap: 16px; }
-    .cv-contact-item {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.83rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s;
-    }
-    .cv-contact-item:hover { color: var(--accent2); }
 
-    /* SECTIONS */
-    .cv-section {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 36px 40px; margin-bottom: 20px;
-      position: relative; overflow: hidden;
-    }
-    .cv-section::before {
-      content: ''; position: absolute; left: 0; top: 24px; bottom: 24px;
-      width: 3px; border-radius: 0 3px 3px 0; background: var(--gradient);
-    }
-    .section-title {
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.15em; color: var(--accent2); margin-bottom: 24px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .sb-section { margin-bottom: 22px; }
 
-    /* ABOUT */
-    .about-paragraphs p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
-    .about-paragraphs p:last-child { margin-bottom: 0; }
-    .about-meta { display: flex; gap: 28px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .about-meta-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
-    .about-meta-value { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-top: 3px; }
+    .sb-title {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #6c63ff; margin-bottom: 10px;
+      padding-bottom: 5px; border-bottom: 1px solid #2a2a3d;
+    }
 
-    /* STATS */
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
-    .stat-card {
-      padding: 20px; background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 10px; text-align: center;
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .contact-list li { display: flex; align-items: flex-start; gap: 7px; font-size: 11px; color: #a0a0c0; }
+    .contact-list a { color: #a0a0c0; text-decoration: none; }
+    .contact-list a:hover { color: #a78bfa; }
+    .contact-list svg { flex-shrink: 0; margin-top: 1px; opacity: 0.7; }
+
+    .skill-group { margin-bottom: 12px; }
+    .skill-group-label { font-size: 10px; font-weight: 600; color: #a78bfa; margin-bottom: 5px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .skill-tag {
+      padding: 2px 7px; border-radius: 4px; font-size: 10px;
+      background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2);
+      color: #c8c8e8; font-weight: 500;
     }
-    .stat-number {
-      font-size: 1.8rem; font-weight: 800;
-      background: var(--gradient); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; background-clip: text;
-      line-height: 1; margin-bottom: 6px;
+
+    .edu-degree { font-size: 11.5px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
+    .edu-school { font-size: 10.5px; color: #a78bfa; font-weight: 600; margin-bottom: 2px; }
+    .edu-period { font-size: 10px; color: #6666888; }
+    .edu-detail { font-size: 10px; color: #888; margin-top: 3px; line-height: 1.4; }
+
+    .cert-item { margin-bottom: 9px; }
+    .cert-title { font-size: 11px; font-weight: 600; color: #e0e0f0; margin-bottom: 1px; }
+    .cert-issuer { font-size: 10px; color: #a78bfa; }
+    .cert-date { font-size: 10px; color: #666; }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      background: #fff;
+      padding: 32px 30px;
     }
-    .stat-label { font-size: 0.76rem; color: var(--text-muted); font-weight: 500; }
+
+    .main-header { margin-bottom: 22px; padding-bottom: 16px; border-bottom: 2px solid #f0f0f4; }
+    .main-name { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #12121a; margin-bottom: 4px; }
+    .main-name span { color: #6c63ff; }
+    .main-roles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .main-role-badge {
+      padding: 3px 9px; border-radius: 12px; font-size: 10.5px; font-weight: 600;
+      background: #f0eeff; color: #6c63ff; border: 1px solid #d0c8ff;
+    }
+    .main-tagline { font-size: 12px; color: #555577; line-height: 1.6; }
+
+    .section { margin-bottom: 20px; }
+    .section-heading {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #6c63ff; margin-bottom: 10px;
+      padding-bottom: 5px; border-bottom: 2px solid #f0eeff;
+    }
+
+    /* SUMMARY */
+    .summary-text { font-size: 12px; color: #444466; line-height: 1.7; }
+
+    /* STATS ROW */
+    .stats-row { display: flex; gap: 12px; margin-bottom: 20px; }
+    .stat-pill {
+      flex: 1; padding: 10px 12px; background: #f8f7ff;
+      border: 1px solid #e8e0ff; border-radius: 8px; text-align: center;
+    }
+    .stat-val { font-size: 18px; font-weight: 800; color: #6c63ff; line-height: 1; margin-bottom: 2px; }
+    .stat-lbl { font-size: 9.5px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; }
 
     /* EXPERIENCE */
-    .exp-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
-    .exp-item:first-child { padding-top: 0; }
-    .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-    .exp-title { font-size: 1rem; font-weight: 700; color: var(--text); }
-    .exp-period { font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: var(--accent3); font-weight: 500; white-space: nowrap; }
-    .exp-org { font-size: 0.85rem; color: var(--accent2); font-weight: 600; margin-bottom: 8px; }
-    .exp-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
-
-    /* EDUCATION */
-    .edu-item { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
-    .edu-item:first-child { padding-top: 0; }
-    .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .edu-icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.2);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.2rem;
-    }
-    .edu-degree { font-size: 0.98rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .edu-school { font-size: 0.85rem; color: var(--accent2); font-weight: 600; margin-bottom: 4px; }
-    .edu-period { font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: var(--accent3); margin-bottom: 6px; }
-    .edu-detail { font-size: 0.84rem; color: var(--text-muted); }
-
-    /* SKILLS */
-    .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
-    .skill-category-card { padding: 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; }
-    .skill-cat-title { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2); margin-bottom: 12px; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .skill-tag {
-      padding: 3px 10px; background: rgba(108,99,255,0.07);
-      border: 1px solid rgba(108,99,255,0.15); border-radius: 6px;
-      font-size: 0.78rem; color: var(--text); font-weight: 500;
-    }
+    .exp-item { margin-bottom: 14px; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
+    .exp-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+    .exp-period { font-size: 10.5px; color: #38bdf8; font-weight: 600; white-space: nowrap; }
+    .exp-org { font-size: 11px; color: #6c63ff; font-weight: 600; margin-bottom: 4px; }
+    .exp-desc { font-size: 11.5px; color: #555577; line-height: 1.6; }
 
     /* PROJECTS */
-    .project-item { padding: 22px 0; border-bottom: 1px solid var(--border); }
-    .project-item:first-child { padding-top: 0; }
-    .project-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
-    .project-title { font-size: 0.98rem; font-weight: 700; color: var(--text); }
-    .project-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .project-year { font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--accent3); }
-    .project-role-badge {
-      padding: 3px 10px; border-radius: 6px; font-size: 0.74rem; font-weight: 600;
-      background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.25); color: var(--accent2);
-    }
-    .highlight-badge {
-      padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 700;
-      background: rgba(108,99,255,0.2); border: 1px solid rgba(108,99,255,0.4);
-      color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .project-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .project-tag {
-      padding: 2px 9px; background: var(--surface); border: 1px solid var(--border);
-      border-radius: 5px; font-size: 0.74rem; color: var(--text-muted); font-weight: 500;
-    }
+    .project-item { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #f4f4f8; }
+    .project-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .project-title { font-size: 12.5px; font-weight: 700; color: #1a1a2e; }
+    .project-year { font-size: 10px; color: #38bdf8; font-weight: 600; }
+    .project-role { font-size: 10px; color: #fff; background: #a78bfa; border-radius: 4px; padding: 1px 7px; font-weight: 600; }
+    .project-desc { font-size: 11px; color: #666; line-height: 1.5; margin-bottom: 5px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .project-tag { padding: 1px 7px; border-radius: 4px; font-size: 10px; background: #f4f4f8; border: 1px solid #e0e0e8; color: #666; }
 
     /* ACHIEVEMENTS */
-    .achievements-list { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .achievement-card {
-      padding: 20px; background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 10px; text-align: center;
-    }
-    .achievement-icon { font-size: 1.6rem; margin-bottom: 10px; }
-    .achievement-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .achievement-detail { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .ach-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .ach-card { padding: 10px; background: #f8f7ff; border: 1px solid #e8e0ff; border-radius: 7px; }
+    .ach-icon { font-size: 14px; margin-bottom: 4px; }
+    .ach-title { font-size: 10.5px; font-weight: 700; color: #1a1a2e; margin-bottom: 2px; }
+    .ach-detail { font-size: 9.5px; color: #888; line-height: 1.4; }
 
-    /* CERTS */
-    .cert-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
-    .cert-item:first-child { padding-top: 0; }
-    .cert-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .cert-icon {
-      width: 40px; height: 40px; border-radius: 8px;
-      background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2);
-      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
-    }
-    .cert-title { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .cert-issuer { font-size: 0.8rem; color: var(--accent2); font-weight: 500; margin-bottom: 3px; }
-    .cert-date { font-size: 0.76rem; color: var(--text-muted); }
-    .cert-id { font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); opacity: 0.7; margin-top: 2px; }
-
-    /* FOOTER */
-    .cv-footer { text-align: center; padding: 28px; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border); }
-    .cv-footer span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
-
-    /* PRINT */
+    /* ── PRINT ── */
     @media print {
+      body { background: #fff; font-size: 11.5px; }
       .toolbar { display: none; }
-      body { background: #fff; color: #1a1a2e; }
-      .page-wrapper { padding: 20px; }
-      .cv-header, .cv-section { border: 1px solid #ddd; background: #fff; break-inside: avoid; box-shadow: none; }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 700px) {
-      .cv-header-inner { flex-direction: column; gap: 20px; }
-      .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .skills-grid { grid-template-columns: 1fr; }
-      .achievements-list { grid-template-columns: 1fr; }
-      .cv-header, .cv-section { padding: 24px 20px; }
+      .page-wrap { margin: 0; box-shadow: none; max-width: 100%; }
+      .cv { min-height: unset; }
+      .sidebar { background: #12121a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .skill-tag, .stat-pill, .ach-card, .main-role-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .exp-item { page-break-inside: avoid; }
+      .project-item { page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
 
   <div class="toolbar">
-    <div class="toolbar-brand">Mujahid · CV</div>
-    <div class="toolbar-actions">
-      <button class="btn btn-primary" onclick="window.print()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <polyline points="6 9 6 2 18 2 18 9"></polyline>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-          <rect x="6" y="14" width="12" height="8"></rect>
-        </svg>
-        Print / Save PDF
-      </button>
-    </div>
+    <span class="toolbar-brand">Mujahid · CV</span>
+    <button class="btn-print" onclick="window.print()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      Print / Save PDF
+    </button>
   </div>
 
-  <div class="page-wrapper">
+  <div class="page-wrap">
+    <div class="cv">
 
-    <!-- HEADER -->
-    <div class="cv-header">
-      <div class="cv-header-inner">
-        <div class="cv-avatar">M</div>
-        <div class="cv-header-info">
-          <div class="availability-badge">
-            <div class="availability-dot"></div>
-            Open to Opportunities
-          </div>
-          <h1 class="cv-name">Tohidur Rahman Mujahid</h1>
-          <div class="cv-titles">
-            <span class="cv-title-badge">AI Engineer</span>
-            <span class="cv-title-badge">Full-Stack Developer</span>
-            <span class="cv-title-badge">RAG / LLM Specialist</span>
-            <span class="cv-title-badge">Problem Solver</span>
-          </div>
-          <p class="cv-tagline">Computer Science student at BRAC University crafting AI-powered, production-grade applications with a deep love for elegant systems and intelligent design.</p>
-          <div class="cv-contact">
-            <a href="mailto:mujuleet@gmail.com" class="cv-contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              mujuleet@gmail.com
-            </a>
-            <a href="https://github.com/Mujahid767" target="_blank" class="cv-contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              github.com/Mujahid767
-            </a>
-            <a href="https://www.linkedin.com/in/tohidur-rahman-mujahid-8755b6280/" target="_blank" class="cv-contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-              LinkedIn
-            </a>
-            <a href="https://www.codechef.com/users/avid_scene_94" target="_blank" class="cv-contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              CodeChef (2★)
-            </a>
-            <span class="cv-contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <!-- ── SIDEBAR ── -->
+      <aside class="sidebar">
+
+        <div class="sidebar-avatar">M</div>
+        <div class="sidebar-name">Tohidur Rahman Mujahid</div>
+        <div class="sidebar-role">AI Engineer · Full-Stack Dev</div>
+        <div class="avail-badge">
+          <div class="avail-dot"></div>
+          Open to Work
+        </div>
+
+        <!-- Contact -->
+        <div class="sb-section">
+          <div class="sb-title">Contact</div>
+          <ul class="contact-list">
+            <li>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:mujuleet@gmail.com">mujuleet@gmail.com</a>
+            </li>
+            <li>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               Dhaka, Bangladesh
-            </span>
+            </li>
+            <li>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <a href="https://github.com/Mujahid767" target="_blank">github.com/Mujahid767</a>
+            </li>
+            <li>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <a href="https://linkedin.com/in/tohidur-rahman-mujahid-8755b6280/" target="_blank">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Skills -->
+        <div class="sb-section">
+          <div class="sb-title">Skills</div>
+          <div class="skill-group">
+            <div class="skill-group-label">AI / ML</div>
+            <div class="skill-tags">
+              <span class="skill-tag">RAG Systems</span>
+              <span class="skill-tag">LangChain</span>
+              <span class="skill-tag">LlamaIndex</span>
+              <span class="skill-tag">OpenAI</span>
+              <span class="skill-tag">Vector DBs</span>
+              <span class="skill-tag">Prompt Eng.</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Frontend</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Tailwind</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Backend</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Prisma</span>
+              <span class="skill-tag">REST APIs</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Languages & Tools</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">C/C++</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Linux</span>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- ABOUT -->
-    <div class="cv-section">
-      <div class="section-title">About Me</div>
-      <div class="about-paragraphs">
-        <p>I'm a Computer Science Engineering student at BRAC University, with a strong foundation in Data Structures &amp; Algorithms, Object-Oriented Programming, and database systems.</p>
-        <p>I specialize in developing AI-powered applications — especially RAG-based systems built on top of modern LLMs. From low-level algorithms to large language models, I love working across the full intelligence stack.</p>
-        <p>I have shipped a real-world production project for a Swedish company and built complex full-stack platforms with Next.js and PostgreSQL. I'm always exploring how to make software smarter, faster and more delightful.</p>
-      </div>
-      <div class="about-meta">
-        <div>
-          <div class="about-meta-label">Location</div>
-          <div class="about-meta-value">Dhaka, Bangladesh</div>
-        </div>
-        <div>
-          <div class="about-meta-label">Focus Area</div>
-          <div class="about-meta-value">AI · LLMs · Full-Stack</div>
-        </div>
-        <div>
-          <div class="about-meta-label">Status</div>
-          <div class="about-meta-value" style="color:#22c55e">Available for Hire</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STATS -->
-    <div class="cv-section">
-      <div class="section-title">At a Glance</div>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-number">4+</div><div class="stat-label">Years Coding</div></div>
-        <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">Projects Built</div></div>
-        <div class="stat-card"><div class="stat-number">18+</div><div class="stat-label">Technologies</div></div>
-        <div class="stat-card"><div class="stat-number">2★</div><div class="stat-label">CodeChef Rating</div></div>
-      </div>
-    </div>
-
-    <!-- EXPERIENCE -->
-    <div class="cv-section">
-      <div class="section-title">Experience</div>
-      <div class="exp-item">
-        <div class="exp-header">
-          <div class="exp-title">Software Developer</div>
-          <div class="exp-period">2025 — Present</div>
-        </div>
-        <div class="exp-org">MobilityPartner (Sweden)</div>
-        <div class="exp-desc">Contributing to a production web platform serving Swedish mobility customers. Working on full-stack features, performance optimization and reliable shipping.</div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-header">
-          <div class="exp-title">Freelance Full-Stack &amp; AI Developer</div>
-          <div class="exp-period">2024 — Present</div>
-        </div>
-        <div class="exp-org">Independent</div>
-        <div class="exp-desc">Building AI-powered web platforms with Next.js and PostgreSQL. Designing RAG systems and LLM integrations for clients.</div>
-      </div>
-    </div>
-
-    <!-- EDUCATION -->
-    <div class="cv-section">
-      <div class="section-title">Education</div>
-      <div class="edu-item">
-        <div class="edu-icon">🎓</div>
-        <div>
-          <div class="edu-degree">B.Sc. in Computer Science &amp; Engineering</div>
+        <!-- Education -->
+        <div class="sb-section">
+          <div class="sb-title">Education</div>
+          <div class="edu-degree">B.Sc. Computer Science &amp; Engineering</div>
           <div class="edu-school">BRAC University</div>
           <div class="edu-period">Ongoing</div>
-          <div class="edu-detail">Focus on AI, Data Structures &amp; Algorithms, OOP, Databases and System Design.</div>
+          <div class="edu-detail">AI, DSA, OOP, Databases, System Design</div>
         </div>
-      </div>
-    </div>
 
-    <!-- SKILLS -->
-    <div class="cv-section">
-      <div class="section-title">Skills &amp; Technologies</div>
-      <div class="skills-grid">
-        <div class="skill-category-card">
-          <div class="skill-cat-title">AI / ML</div>
-          <div class="skill-tags">
-            <span class="skill-tag">RAG Systems</span><span class="skill-tag">LangChain</span>
-            <span class="skill-tag">LlamaIndex</span><span class="skill-tag">OpenAI / GPT</span>
-            <span class="skill-tag">Vector DBs</span><span class="skill-tag">Embeddings</span>
-            <span class="skill-tag">Prompt Engineering</span><span class="skill-tag">Agents</span>
+        <!-- Certificates -->
+        <div class="sb-section">
+          <div class="sb-title">Certificates</div>
+          <div class="cert-item">
+            <div class="cert-title">Job Ready Data Science</div>
+            <div class="cert-issuer">CodeWithHarry</div>
+            <div class="cert-date">Sep 2025</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-title">Delta — Full Stack Web Dev</div>
+            <div class="cert-issuer">Apna College</div>
           </div>
         </div>
-        <div class="skill-category-card">
-          <div class="skill-cat-title">Frontend</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Next.js</span><span class="skill-tag">React</span>
-            <span class="skill-tag">TypeScript</span><span class="skill-tag">Tailwind CSS</span>
-            <span class="skill-tag">Framer Motion</span><span class="skill-tag">shadcn/ui</span>
-          </div>
-        </div>
-        <div class="skill-category-card">
-          <div class="skill-cat-title">Backend</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Node.js</span><span class="skill-tag">Express</span>
-            <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Prisma</span>
-            <span class="skill-tag">Drizzle</span><span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">Authentication</span>
-          </div>
-        </div>
-        <div class="skill-category-card">
-          <div class="skill-cat-title">Tools &amp; Languages</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">C / C++</span><span class="skill-tag">Java</span>
-            <span class="skill-tag">Git &amp; GitHub</span><span class="skill-tag">Linux</span>
-            <span class="skill-tag">Docker</span>
-          </div>
-        </div>
-        <div class="skill-category-card">
-          <div class="skill-cat-title">Computer Science</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Data Structures</span><span class="skill-tag">Algorithms</span>
-            <span class="skill-tag">OOP</span><span class="skill-tag">Database Systems</span>
-            <span class="skill-tag">System Design</span><span class="skill-tag">Competitive Programming</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- PROJECTS -->
-    <div class="cv-section">
-      <div class="section-title">Featured Projects</div>
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">National Party Management Platform</div>
-          <div class="project-meta">
-            <span class="project-year">2025</span>
-            <span class="project-role-badge">Full-Stack Engineer</span>
-            <span class="highlight-badge">Featured</span>
+      </aside>
+
+      <!-- ── MAIN ── -->
+      <main class="main">
+
+        <div class="main-header">
+          <div class="main-name">Tohidur <span>Rahman</span> Mujahid</div>
+          <div class="main-roles">
+            <span class="main-role-badge">AI Engineer</span>
+            <span class="main-role-badge">Full-Stack Developer</span>
+            <span class="main-role-badge">RAG / LLM Specialist</span>
+          </div>
+          <div class="main-tagline">
+            CS student at BRAC University crafting AI-powered, production-grade applications. Specialist in RAG systems, LLMs, and modern full-stack platforms.
           </div>
         </div>
-        <p class="project-desc">Secure, transparent platform for managing party operations, 300 parliamentary constituencies, cabinet voting, MP meetings and fund transparency. Built with Next.js + PostgreSQL with role-based access for Admin, Chairman, Minister, MP and Public users.</p>
-        <div class="project-tags">
-          <span class="project-tag">Next.js</span><span class="project-tag">PostgreSQL</span>
-          <span class="project-tag">TypeScript</span><span class="project-tag">Tailwind</span>
-          <span class="project-tag">Auth</span>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-pill"><div class="stat-val">4+</div><div class="stat-lbl">Yrs Coding</div></div>
+          <div class="stat-pill"><div class="stat-val">12</div><div class="stat-lbl">Projects</div></div>
+          <div class="stat-pill"><div class="stat-val">18+</div><div class="stat-lbl">Technologies</div></div>
+          <div class="stat-pill"><div class="stat-val">2★</div><div class="stat-lbl">CodeChef</div></div>
         </div>
-      </div>
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">MobilityPartner — Sweden</div>
-          <div class="project-meta">
-            <span class="project-year">2025</span>
-            <span class="project-role-badge">Developer</span>
-            <span class="highlight-badge">Featured</span>
+
+        <!-- Experience -->
+        <div class="section">
+          <div class="section-heading">Experience</div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div class="exp-title">Software Developer</div>
+              <div class="exp-period">2025 — Present</div>
+            </div>
+            <div class="exp-org">MobilityPartner · Sweden</div>
+            <div class="exp-desc">Contributing to a live production web platform serving Swedish mobility customers. Delivered full-stack features with a focus on reliability and performance.</div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div class="exp-title">Freelance Full-Stack &amp; AI Developer</div>
+              <div class="exp-period">2024 — Present</div>
+            </div>
+            <div class="exp-org">Independent</div>
+            <div class="exp-desc">Built AI-powered web platforms for clients using Next.js, PostgreSQL, and custom RAG / LLM pipelines.</div>
           </div>
         </div>
-        <p class="project-desc">Production project for a Swedish mobility company. Worked on a real-world platform serving customers across Sweden, focusing on reliability, performance and clean engineering.</p>
-        <div class="project-tags">
-          <span class="project-tag">Production</span><span class="project-tag">Web Platform</span>
-          <span class="project-tag">Real Client</span>
-        </div>
-      </div>
-      <div class="project-item">
-        <div class="project-header">
-          <div class="project-title">RAG Knowledge Assistant</div>
-          <div class="project-meta">
-            <span class="project-year">2025</span>
-            <span class="project-role-badge">AI Engineer</span>
+
+        <!-- Projects -->
+        <div class="section">
+          <div class="section-heading">Featured Projects</div>
+
+          <div class="project-item">
+            <div class="project-header">
+              <div class="project-title">National Party Management Platform</div>
+              <div style="display:flex;gap:5px;align-items:center">
+                <span class="project-role">Full-Stack</span>
+                <span class="project-year">2025</span>
+              </div>
+            </div>
+            <div class="project-desc">Secure multi-role platform (Admin, Chairman, Minister, MP, Public) managing 300 constituencies, voting, meetings and fund transparency.</div>
+            <div class="project-tags">
+              <span class="project-tag">Next.js</span><span class="project-tag">PostgreSQL</span><span class="project-tag">TypeScript</span><span class="project-tag">Auth</span>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-header">
+              <div class="project-title">RAG Knowledge Assistant</div>
+              <div style="display:flex;gap:5px;align-items:center">
+                <span class="project-role">AI Engineer</span>
+                <span class="project-year">2025</span>
+              </div>
+            </div>
+            <div class="project-desc">Retrieval-augmented chat assistant over private documents with semantic search, vector store, and LLM-grounded answers.</div>
+            <div class="project-tags">
+              <span class="project-tag">RAG</span><span class="project-tag">LLM</span><span class="project-tag">Vector DB</span><span class="project-tag">Python</span>
+            </div>
           </div>
         </div>
-        <p class="project-desc">A retrieval-augmented chat assistant over private documents — semantic search with embeddings, vector store, and LLM-powered answers grounded in source citations.</p>
-        <div class="project-tags">
-          <span class="project-tag">RAG</span><span class="project-tag">LLM</span>
-          <span class="project-tag">Vector DB</span><span class="project-tag">Python</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- ACHIEVEMENTS -->
-    <div class="cv-section">
-      <div class="section-title">Achievements</div>
-      <div class="achievements-list">
-        <div class="achievement-card">
-          <div class="achievement-icon">⭐</div>
-          <div class="achievement-title">2★ Coder on CodeChef</div>
-          <div class="achievement-detail">Active competitive programmer on CodeChef solving algorithmic challenges.</div>
+        <!-- Achievements -->
+        <div class="section">
+          <div class="section-heading">Achievements</div>
+          <div class="ach-list">
+            <div class="ach-card">
+              <div class="ach-icon">⭐</div>
+              <div class="ach-title">2★ CodeChef Coder</div>
+              <div class="ach-detail">Active competitive programmer</div>
+            </div>
+            <div class="ach-card">
+              <div class="ach-icon">🚀</div>
+              <div class="ach-title">Production Software</div>
+              <div class="ach-detail">Live project shipped for Swedish client</div>
+            </div>
+            <div class="ach-card">
+              <div class="ach-icon">👑</div>
+              <div class="ach-title">National Platform</div>
+              <div class="ach-detail">Architected full multi-role system</div>
+            </div>
+          </div>
         </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">🚀</div>
-          <div class="achievement-title">Shipped Production Software</div>
-          <div class="achievement-detail">Delivered a live production project for a real client based in Sweden.</div>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">👑</div>
-          <div class="achievement-title">Built a National-Scale Platform</div>
-          <div class="achievement-detail">Architected a multi-role political party management system end-to-end.</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- CERTIFICATES -->
-    <div class="cv-section">
-      <div class="section-title">Certificates</div>
-      <div class="cert-item">
-        <div class="cert-icon">🏅</div>
-        <div>
-          <div class="cert-title">The Ultimate Job Ready Data Science Course</div>
-          <div class="cert-issuer">CodeWithHarry</div>
-          <div class="cert-date">September 14, 2025</div>
-          <div class="cert-id">ID: CWH-THE-ULTIMATE-JOB-READY-DATA-SCIENCE-COURSE-8XKL8HJZ</div>
-        </div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">🏅</div>
-        <div>
-          <div class="cert-title">Delta — Full Stack Web Development</div>
-          <div class="cert-issuer">Apna College</div>
-          <div class="cert-id">ID: 68f9031d8382ee066c018577</div>
-        </div>
-      </div>
+      </main>
     </div>
-
-    <div class="cv-footer">
-      Generated from portfolio &nbsp;·&nbsp; <span>Tohidur Rahman Mujahid</span> &nbsp;·&nbsp; 2025
-    </div>
-
   </div>
+
 </body>
 </html>
